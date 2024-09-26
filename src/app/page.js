@@ -25,10 +25,12 @@ const ImageCarousel = () => {
       setCurrentIndex((prevIndex) => 
         prevIndex + 1 >= images.length ? 0 : prevIndex + 1
       );
-    }, 5000); // Aumentado a 3 segundos para una transición más suave
+    }, 5000);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [images.length]);
 
   return (
     <div className={styles.carouselContainer}>
@@ -54,6 +56,7 @@ const ImageCarousel = () => {
 
 const SpaBoutiqueLanding = () => (
   <>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"></link>
     <header className={styles.header}>
     <Image src="/elitebrows_logo.png" alt="Elite Brows Logo" width={800} height={200} />
       <nav>
@@ -69,14 +72,14 @@ const SpaBoutiqueLanding = () => (
     <main>
       <section className={styles.hero}>
         <section className={styles.heroContent}>
-          <h1>Resalta Tu Belleza De Manera Natural</h1>
+          <h1 >NOS ENFOCAMOS EN RESULTADOS <em>NATURALES</em> QUE REALZAN TU BELLEZA</h1>
           <p>Satisfacemos y superamos las expectativas de cada cliente logrando cambios positivos a nivel físico y emocional.</p>
           <button className={styles.ctaButton}>Reserva tu cita</button>
         </section>
         <section className={styles.heroImage}>
           <div className={styles.imageWrapper}>
             <Image 
-              src="/mujerflor.png" 
+              src="/mujerflormor.png" 
               alt="Mujer hermosa con flor"
               width={500} 
               height={750} 
@@ -90,6 +93,47 @@ const SpaBoutiqueLanding = () => (
           </svg>
         </section>
       </section>
+      <section className={styles.whoWeAre}>
+      <div className={styles.whoWeAreContent}>
+        <div className={styles.whoWeAreImage}>
+          <Image 
+            src="/whoare1.jpg" 
+            alt="Equipo de Elite Brows" 
+            width={450} 
+            height={500} 
+            layout="responsive"
+          />
+        </div>
+        <div className={styles.whoWeAreText}>
+          <h2>QUIÉNES SOMOS</h2>
+          <p>
+            Elite Brows es un estudio de belleza de primer nivel especializado en Microblading y 
+            Maquillaje Permanente, ubicado en [Ciudad], [País]. Entendemos que el maquillaje permanente 
+            es una decisión importante que requiere una cuidadosa consideración.
+          </p>
+          <p>
+            Experimenta el arte del microblading en Elite Brows, donde nuestros profesionales expertos 
+            se especializan en crear cejas impresionantes y de aspecto natural. Nuestra técnica meticulosa 
+            y enfoque personalizado aseguran que logres la forma y el color de cejas perfectos para realzar 
+            tus rasgos únicos.
+          </p>
+          <p>
+            Además del microblading, ofrecemos servicios excepcionales de extensión de pestañas y 
+            tratamientos para la piel, mejorando tu rutina de belleza con servicios diseñados para 
+            hacerte sentir segura mientras disfrutas de un estilo de vida de bajo mantenimiento.
+          </p>
+          <p>
+            Damos una alta prioridad a la seguridad y la higiene, proporcionando nuestros servicios en 
+            un entorno semi-clínico con técnicos totalmente certificados y licenciados.
+          </p>
+          <button className={styles.ctaButton}>CONOCE AL EQUIPO</button>
+        </div>
+      </div>
+    </section>
+      <section className={styles.heroContent}>
+          <h2 >Nuestros Trabajos</h2>
+      </section>
+      
       <section className={styles.carouselSection}>
         <div className={styles.carouselBackground}>
           <Image 
@@ -101,7 +145,6 @@ const SpaBoutiqueLanding = () => (
           />
         </div>
         <div className={styles.carouselContent}>
-          <h2>Nuestros Trabajos</h2>
           <ImageCarousel />
         </div>
       </section>
@@ -110,9 +153,9 @@ const SpaBoutiqueLanding = () => (
       <section className={styles.services}>
         <h2>Nuestros Servicios</h2>
         <div className={styles.serviceGrid}>
-          {['Microblading', 'Extensiones de Pestañas', 'Tratamientos Faciales', 'Maquillaje Profesional'].map((service) => (
+          {['Microblading', 'Extensiones de Pestañas', 'Tratamientos Faciales', 'Maquillaje'].map((service) => (
             <div key={service} className={styles.serviceCard}>
-              <Image src={`/${service.toLowerCase().replace(' ', '-')}.png`} alt={service} width={100} height={100} />
+              <Image src={`/${service.toLowerCase().replace(' ', '-')}.jpg`} alt={service} width={280} height={280} className={styles.serviceimg}/>
               <h3>{service}</h3>
               <p>Descubre cómo podemos realzar tu belleza natural con nuestro servicio de {service}.</p>
             </div>
