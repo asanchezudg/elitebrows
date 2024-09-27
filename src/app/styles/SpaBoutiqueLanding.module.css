@@ -7,6 +7,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    
   }
   
   .logo {
@@ -31,7 +32,8 @@
     display: flex;
     height: 80vh; /* Mantenemos la altura, pero puedes reducirla si lo deseas */
     padding: 0 50px;
-    margin-bottom: 2rem; /* Añadimos un margen inferior más pequeño */
+    margin-bottom: 2rem;
+    margin-top: 5rem; /* Añadimos un margen inferior más pequeño */
   }
   
   .heroContent {
@@ -203,7 +205,7 @@
     background-color: #fff;
     border-radius: 10px;
     padding: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px #5E0626;
     transition: transform 0.3s ease;
     
   }
@@ -245,7 +247,7 @@
     background-color: #fff;
     border-radius: 10px;
     padding: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px #5E0626;
     transition: transform 0.3s ease;
   }
   
@@ -334,7 +336,7 @@
   .whoWeAre {
     padding: 4rem 2rem;
     background-color: #ffffff;
-    margin-top: -10rem;
+    margin-top: -20rem;
   }
   
   .whoWeAreContent {
@@ -392,4 +394,93 @@
       margin-right: 0;
       margin-bottom: 2rem;
     }
+  }
+
+  .booking {
+    padding: 4rem 2rem;
+    background-color: #f9f9f9;
+    text-align: center;
+    
+  }
+  
+  .booking h2 {
+    font-size: 2.5rem;
+    color: #5E0626;
+    margin-bottom: 1.5rem;
+  }
+  
+  .bookingForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 4px 6px #5E0626;
+
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px #5E0626;
+    transition: transform 0.3s ease;
+  }
+  
+  .bookingForm input,
+  .bookingForm select {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .centeredButton {
+    align-self: center;
+    margin-top: 20px; /* Ajusta este valor según necesites */
+    min-width: 200px; /* Ajusta este valor según el ancho que prefieras */
+  }
+  
+  .calendarLink {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #5E0626;
+    text-decoration: underline;
+  }
+  
+  .bookingConditions {
+    margin-top: 2rem;
+    text-align: left;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .bookingConditions h3 {
+    color: #5E0626;
+    margin-bottom: 1rem;
+  }
+  
+  .bookingConditions ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+  }
+  
+  .whatsappButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #109c44;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    margin-top: 1rem;
+  }
+  
+  .whatsappButton img {
+    margin-right: 10px;
+  }
+
+  .spacer {
+    height: 100px; /* Ajusta este valor para aumentar o disminuir el espacio */
+  }
+
+  .spacer4 {
+    height: 30px; /* Ajusta este valor para aumentar o disminuir el espacio */
   }

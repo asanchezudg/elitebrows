@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import styles from './styles/SpaBoutiqueLanding.module.css';
+import { GOOGLE_CLIENT_ID, GOOGLE_API_KEY, REDIRECT_URI } from './config';
 
 
 const testimonials = [
@@ -10,6 +11,8 @@ const testimonials = [
   { name: 'Laura S.', text: 'Las extensiones de pestañas transformaron mi mirada. ¡Me siento bella todos los días!' },
   { name: 'Carlos R.', text: 'El trato profesional y los resultados superaron mis expectativas. Altamente recomendado.' }
 ];
+
+
 
 const ImageCarousel = () => {
   const images = [
@@ -19,6 +22,8 @@ const ImageCarousel = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -51,6 +56,103 @@ const ImageCarousel = () => {
         ))}
       </div>
     </div>
+  );
+};
+
+const BookingForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    service: '',
+    date: '',
+    time: ''
+  });
+
+  const availableHours = [
+    '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
+  ];
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const message = encodeURIComponent(
+      `Hola buenas tardes, soy ${formData.name} y quiero registrar una Cita el día ${formData.date} con horario ${formData.time}. Servicio: ${formData.service}. Mi teléfono es ${formData.phone} y mi email es ${formData.email}.`
+    );
+    
+    const whatsappUrl = `https://wa.me/5569059924?text=${message}`;
+    
+    // Abre WhatsApp en una nueva pestaña
+    window.open(whatsappUrl, '_blank');
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className={styles.bookingForm}>
+      <input
+        type="text"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        placeholder="Nombre completo"
+        required
+      />
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="Correo electrónico"
+        required
+      />
+      <input
+        type="tel"
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        placeholder="Teléfono"
+        required
+      />
+      <select
+        name="service"
+        value={formData.service}
+        onChange={handleChange}
+        required
+      >
+        <option value="">Selecciona un servicio</option>
+        <option value="microblading">Microblading</option>
+        <option value="pestanas">Extensiones de Pestañas</option>
+        <option value="facial">Tratamientos Faciales</option>
+        <option value="maquillaje">Maquillaje</option>
+      </select>
+      <input
+        type="date"
+        name="date"
+        value={formData.date}
+        onChange={handleChange}
+        required
+      />
+      <select
+        name="time"
+        value={formData.time}
+        onChange={handleChange}
+        required
+      >
+        <option value="">Selecciona un horario</option>
+        {availableHours.map((hour) => (
+          <option key={hour} value={hour}>
+            {hour}
+          </option>
+        ))}
+      </select>
+      <button type="submit" className={`${styles.ctaButton} ${styles.centeredButton}`}>
+          Enviar solicitud
+        </button>
+    </form>
   );
 };
 
@@ -167,25 +269,74 @@ const SpaBoutiqueLanding = () => (
         <h2>Lo Que Dicen Nuestros Clientes</h2>
         <div className={styles.testimonialGrid}>
           {[
-            { name: 'María G.', text: 'El mejor servicio de microblading que he experimentado. ¡Resultados naturales y duraderos!' },
-            { name: 'Laura S.', text: 'Las extensiones de pestañas transformaron mi mirada. ¡Me siento bella todos los días!' },
-            { name: 'Carlos R.', text: 'El trato profesional y los resultados superaron mis expectativas. Altamente recomendado.' }
+            { 
+              name: 'Ana L.', 
+              text: 'Mi experiencia con el microblading en Elite Brows fue increíble. La atención personalizada y la técnica precisa de la especialista hicieron que mis cejas lucieran naturales y definidas. Han pasado meses y siguen viéndose perfectas. ¡Totalmente recomendado!'
+            },
+            { 
+              name: 'Sofía Marquez.', 
+              text: 'Las extensiones de pestañas superaron mis expectativas. El proceso fue cómodo y relajante, y el resultado es asombroso. Mis ojos se ven más grandes y expresivos, y lo mejor es que me ahorra tiempo en mi rutina diaria. El equipo de Elite Brows es profesional y amable.'
+            },
+            { 
+              name: 'Laura Rios.', 
+              text: 'Nunca pensé que un tratamiento facial pudiera hacer tanta diferencia. La limpieza profunda y el masaje dejaron mi piel renovada y con un brillo que no había visto en años. El ambiente del spa es tranquilo y acogedor, y el personal realmente sabe lo que hace. Volveré sin duda.'
+            }
           ].map((testimonial, index) => (
             <div key={index} className={styles.testimonialCard}>
               <p className={styles.testimonialName}>- {testimonial.name}</p>
+              <p className={styles.testimonialName}>- {testimonial.text}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className={styles.booking}>
+        <h2>Agenda tu Cita</h2>
+        <p>Para agendar tu cita, por favor llena el siguiente formulario o selecciona una fecha en nuestro calendario.</p>
+        <div className={styles.spacer4}></div>
+        <BookingForm />
+        <div className={styles.bookingConditions}>
+          <h3>Para registrar tu cita en el calendario:</h3>
+          <ul>
+            <li>Hacer clic en el texto <em>Ver disponibilidad en el calendario.</em></li>
+            <li>Se va a abrir el calendario de Google.</li>
+            <li>Seleccionar Dia y Hora.</li>
+            <li>En Añadir Titulo ingresar Nombre - Servicio y Telefono.</li>
+          </ul>
+        </div>
+        <div className={styles.spacer}></div>
+        <a 
+          href="https://calendar.google.com/calendar/u/0?cid=ZWxpdGVicm93cy5teEBnbWFpbC5jb20" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={`${styles.ctaButton} ${styles.centeredButton}`}
+        >
+          Ver disponibilidad en el calendario
+        </a>
+        
+        <div className={styles.bookingConditions}>
+          <h3>Condiciones de reserva:</h3>
+          <ul>
+            <li>Se requiere un depósito no reembolsable para confirmar la cita.</li>
+            <li>Por favor, llega 10 minutos antes de tu cita programada.</li>
+            <li>Si no puedes asistir, notifícanos con al menos 24 horas de anticipación.</li>
+            <li>El incumplimiento de los requisitos puede resultar en la cancelación de la cita sin reembolso.</li>
+          </ul>
         </div>
       </section>
 
       <section className={styles.cta}>
         <h2>¿Lista para Resaltar tu Belleza Natural?</h2>
         <p>Agenda tu cita hoy y déjanos ayudarte a lucir tu mejor versión.</p>
-        <button className={styles.ctaButton}>Reserva Ahora</button>
+        <a href="https://wa.me/5569059924" target="_blank" rel="noopener noreferrer" className={styles.whatsappButton}>
+        <Image src="/whatsapp-icon.png" alt="WhatsApp" width={30} height={30}  />
+        Contáctanos por WhatsApp
+      </a>
       </section>
     </main>
     <footer className={styles.footer}>
       <p>&copy; 2024 Spa & Boutique Elite Brows. Todos los derechos reservados.</p>
+      
     </footer>
   </>
 );
