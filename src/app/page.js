@@ -98,7 +98,7 @@ const BookingForm = () => {
         name="name"
         value={formData.name}
         onChange={handleChange}
-        placeholder="Nombre completo"
+        placeholder="Nombre"
         required
       />
       <input
@@ -199,7 +199,7 @@ const SpaBoutiqueLanding = () => (
       <div className={styles.whoWeAreContent}>
         <div className={styles.whoWeAreImage}>
           <Image 
-            src="/whoare1.jpg" 
+            src="/whoare2.jpg" 
             alt="Equipo de Elite Brows" 
             width={450} 
             height={500} 
